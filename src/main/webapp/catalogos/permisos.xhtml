@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+        <h:outputStylesheet library="css" name="menu.css"/>
+        <h:outputStylesheet library="css" name="tablas.css" />
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/plantilla.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2">
+                            <p:panelGrid class="col-sm-2" columns="2">
+                                <p:outputLabel value="Perfil" for="perfil" />
+                                <h:selectOneMenu id="perfil" value="#{permisosManaged.unPerfil.idperfiles}" disabled="#{permisosManaged.menuPerfil}" >
+                                    <f:selectItem itemLabel="Seleccione Uno" itemValue="0" />
+                                    <f:selectItems value="#{permisosManaged.listaPerfiles}" var="perfil" itemLabel="#{perfil.descripcion}" itemValue="#{perfil.idperfiles}"/>
+                                    <p:ajax event="keyup" listener="#{permisosManaged.cambioPerfil()}"/>
+                                </h:selectOneMenu>
+                            </p:panelGrid>
+                        </div>
+                        <div class="col-sm-2">
+                            <h:commandButton action="#{permisosManaged.cambioPerfil()}" value="Acpetar" styleClass="btn btn-primary"></h:commandButton>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                    <br/>
+                </h:form>
+                <br/>
+                <div class="col-sm-12" align="center">
+                    <f:view>
+                        <h:form>
+                            <p:dataTable id="tablaPermisos" value="#{permisosManaged.listaPermisos}" var="item">
+                                <f:facet name="header">
+                                    Lista de Permisos
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Menu"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idSub}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Pantalla"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etiqueta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Alta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.alta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Baja"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.baja}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Editar"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.editar}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Consultar"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.consultar}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Imprimir"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.imprimir}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Importar"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.importar}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Exportar"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.exportar}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estatus"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estatus}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Liga"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.liga}"/>
+                                </p:column>
+                                <p:column headerText="Editar">
+                                    <h:commandButton action="#{permisosManaged.editaPermisos(item)}" value="Editar" styleClass="btn btn-primary"></h:commandButton>
+                                </p:column>
+                                <p:column headerText="Borrar">
+                                    <h:commandButton action="#{permisosManaged.borraPermisos(item)}" value="Borrar" styleClass="btn btn-danger"></h:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
+                </div>
+                <p:separator/>
+                <div class="col-sm-12" align="center">
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="#{permisosManaged.titulo}"/></h1>
+
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-2">
+                                    <p:panelGrid class="col-sm-2" columns="2">
+                                        <p:outputLabel value="Menus" for="menus" />
+                                        <h:selectOneMenu id="menus" value="#{permisosManaged.unPermiso.idSub}" disabled="#{permisosManaged.menuMenus}">
+                                            <f:selectItems value="#{permisosManaged.listaMenus}" var="menus" itemLabel="#{menus.nombre}" itemValue="#{menus.idMenu}"/>
+                                        </h:selectOneMenu>
+                                    </p:panelGrid>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h:commandButton action="#{permisosManaged.cambioMenus()}" value="Acpetar" styleClass="btn btn-primary"></h:commandButton>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <br/>
+                        </h:form>
+                        <h:form>
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-2">
+                                    <p:panelGrid class="col-sm-2" columns="2">
+                                        <p:outputLabel value="Pantallas" for="pantallas" />
+                                        <h:selectOneMenu id="pantallas" value="#{permisosManaged.unPerfil.idperfiles}" disabled="#{permisosManaged.menuPantallas}">
+                                            <f:selectItems value="#{permisosManaged.listaPantallas}" var="pantalla" itemLabel="#{pantalla.nombre}" itemValue="#{pantalla.idPantalla}"/>
+                                            <p:ajax event="keyup" listener="#{permisosManaged.cambioPerfil()}"/>
+                                        </h:selectOneMenu>
+                                    </p:panelGrid>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h:commandButton action="#{permisosManaged.cambioPantallas()}" value="Acpetar" styleClass="btn btn-primary"></h:commandButton>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <br/>
+                        </h:form>
+
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Alta:" for="alta" />
+                                <p:selectOneRadio id="alta" value="#{permisosManaged.unPermiso.alta}">
+                                    <f:selectItem itemLabel="No" itemValue="false"/>
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Baja:" for="baja" />
+                                <p:selectOneRadio id="baja" value="#{permisosManaged.unPermiso.baja}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Editar:" for="editar" />
+                                <p:selectOneRadio id="editar" value="#{permisosManaged.unPermiso.editar}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Consultar:" for="consultar" />
+                                <p:selectOneRadio id="consultar" value="#{permisosManaged.unPermiso.consultar}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Imprimir:" for="imprimir" />
+                                <p:selectOneRadio id="imprimir" value="#{permisosManaged.unPermiso.imprimir}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Importar:" for="importar" />
+                                <p:selectOneRadio id="importar" value="#{permisosManaged.unPermiso.importar}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Exportar:" for="exportar" />
+                                <p:selectOneRadio id="exportar" value="#{permisosManaged.unPermiso.exportar}">
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                </p:selectOneRadio>
+                                <p:outputLabel value="Estatus:" for="estatus" />
+                                <h:selectOneMenu id="estatus" value="#{permisosManaged.unPermiso.estatus}" >
+                                    <f:selectItem itemLabel="Activo" itemValue="True" />
+                                    <f:selectItem itemLabel="Inactivo" itemValue="False" />
+                                </h:selectOneMenu>
+                                <p:outputLabel value="Liga:" for="liga" />
+                                <p:inputText id="liga" value="#{permisosManaged.unPermiso.liga}" title="Liga" />
+                            </p:panelGrid>
+                            <br/>
+                            <h:commandButton action="#{permisosManaged.guardaPermisos()}" value="Guardar" styleClass="btn btn-primary"></h:commandButton>
+                        </h:form>
+                    </f:view>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

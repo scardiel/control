@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <title>Usuarios</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="container-fluid" align="center">
+                    <h:form>
+                        <div class="col-sm-12">
+                            <h3><h:outputText value="#{userManaged.titulo}"/></h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" align="center">
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="Nombre:" for="nombre" />   
+                                    <h:inputText id="nombre" value="#{userManaged.unUsuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                    <h:outputLabel value="Apat:" for="apat" />
+                                    <h:inputText id="apat" value="#{userManaged.unUsuario.apat}" title="Apat" required="true" requiredMessage="The Apat field is required."/>
+                                    <h:outputLabel value="Amat:" for="amat" />
+                                    <h:inputText id="amat" value="#{userManaged.unUsuario.amat}" title="Amat" />
+                                    <h:outputLabel value="Idempresa:" for="idempresa" />
+                                    <h:inputText id="idempresa" value="#{userManaged.unUsuario.idempresa}" title="Idempresa" required="true" requiredMessage="The Idempresa field is required."/>
+                                    <h:outputLabel value="Idarea:" for="idarea" />
+                                    <h:inputText id="idarea" value="#{userManaged.unUsuario.idarea}" title="Idarea" required="true" requiredMessage="The Idarea field is required."/>
+                                    <h:outputLabel value="Telefono:" for="telefono" />
+                                    <h:inputText id="telefono" value="#{userManaged.unUsuario.telefono}" title="Telefono" />
+                                    <h:outputLabel value="Email:" for="email" />
+                                    <h:inputText id="email" value="#{userManaged.unUsuario.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                                    <h:outputLabel value="Idperfiles:" for="idperfiles" />
+                                    <h:inputText id="idperfiles" value="#{userManaged.unUsuario.idperfiles}" title="Idperfiles" required="true" requiredMessage="The Idperfiles field is required."/>
+                                    <h:outputLabel value="Usuario:" for="usuario" />
+                                    <h:inputText id="usuario" value="#{userManaged.unUsuario.usuario}" title="Usuario" required="true" requiredMessage="The Usuario field is required."/>
+                                    <h:outputLabel value="Password:" for="password" />
+                                    <h:inputText id="password" value="#{userManaged.unUsuario.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                                    <h:outputLabel value="Estatus:" for="estatus" />
+                                    <h:selectOneMenu value="#{userManaged.unUsuario.estatus}" >
+                                        <f:selectItem itemLabel="Activo" itemValue="True" />
+                                        <f:selectItem itemLabel="Inactivo" itemValue="False" />
+                                    </h:selectOneMenu>
+        <!--                            <h:inputText id="estatus" value="#{userManaged.unUsuario.estatus}" title="Estatus" required="true" requiredMessage="The Estatus field is required."/>  -->
+                                </h:panelGrid>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-2" align="center">
+                                <h:commandButton action="#{userManaged.guardaUsuario()}" value="Guardar" class="btn btn-primary active"></h:commandButton>            
+                            </div>
+                            <div class="col-sm-2" align="center">
+                                <h:commandButton action="#{userManaged.botonRergesa()}" value="Regresar" class="btn btn-primary active" ></h:commandButton>            
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
